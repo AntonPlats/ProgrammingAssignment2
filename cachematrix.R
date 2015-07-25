@@ -1,33 +1,33 @@
-## Put comments here that give an overall description of what your
-## functions do
+## R programming 
+## Assignment #2
+## MakeCacheMatrix 
 
-## Write a short comment describing this function
-
+## make a function to make a matrix
 makeCacheMatrix <- function(x = matrix()) {
-    inv <- NULL
-   set <- function(y) {
+    inv <- NULL  # inv for inverse 
+   set <- function(y) { #set the inversed function of x
        x <<- y
         inv <<- NULL
     }
-   get <- function() x
-   setinv <- function(inverse) inv <<- inverse
-   getinv <- function() inv
-   list(set = set, get = get,
+   get <- function() x # get the x
+   setinv <- function(inverse) inv <<- inverse #set the inversed matrix of x
+   getinv <- function() inv #get the inversed function of x
+   list(set = set, get = get, #return a list 
         setinv = setinv,
         getinv = getinv)
 
 }
-## Write a short comment describing this function
+## inverse invertable matrix x
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-    inv <- x$getinv()
-    if(!is.null(inv)) {
-        message("getting cached data")
-        return(inv)
+    inv <- x$getinv() #take the value of getinv from makeCacheMatrix
+    if(!is.null(inv)) {# if the inv veriable is not NULL
+        message("getting cached data") #get the cached data and display a mssage
+        return(inv) #exit if inv has the inverse of x
     }
-    data <- x$get()
-    inv <- solve(data, ...)
-    x$setinv(inv)
-    inv
+    data <- x$get()# if inv is NULL get the matrix x
+    inv <- solve(data, ...) #calculate the inverse of data
+    x$setinv(inv) #cache the inverse of x in inv
+    inv # return inv
 }
